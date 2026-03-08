@@ -1,38 +1,13 @@
 import { useParams, Link } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import { supabase } from '@/integrations/supabase/client';
-import { format } from 'date-fns';
 import { ArrowLeft } from 'lucide-react';
 import { motion } from 'framer-motion';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import { getPostBySlug } from '@/lib/blog';
 
 export default function BlogPost() {
   const { slug } = useParams<{ slug: string }>();
-
-  const { data: post, isLoading } = useQuery({
-    queryKey: ['blog-post', slug],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from('blog_posts')
-        .select('*')
-        .eq('slug', slug!)
-        .single();
-      if (error) throw error;
-      return data;
-    },
-    enabled: !!slug,
-  });
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen pt-24 pb-16">
-        <div className="container max-w-3xl space-y-4">
-          <div className="h-8 w-48 bg-secondary/50 animate-pulse rounded" />
-          <div className="h-12 w-full bg-secondary/50 animate-pulse rounded" />
-          <div className="h-96 w-full bg-secondary/50 animate-pulse rounded" />
-        </div>
-      </div>
-    );
-  }
+  const post = slug ? getPostBySlug(slug) : undefined;
 
   if (!post) {
     return (
@@ -46,15 +21,15 @@ export default function BlogPost() {
     <div className="min-h-screen pt-24 pb-16">
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="container max-w-3xl">
         <Link to="/blog" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-primary mb-8 transition-colors">
-          <ArrowLeft className="h-4 w-4" /> Back to blog
+          <ArrowLeft className="h-4 w-4" /> Back to posts
         </Link>
-        <time className="block text-xs text-muted-foreground uppercase tracking-wider mb-3">
-          {format(new Date(post.created_at), 'MMMM d, yyyy')}
-        </time>
-        <h1 className="font-display text-3xl md:text-5xl font-bold mb-8">{post.title}</h1>
-        <div className="prose prose-invert max-w-none text-muted-foreground leading-relaxed whitespace-pre-wrap">
-          {post.content}
-        </div>
+        <p className="text-sm text-muted-foreground mb-3">
+          {post.date} · {post.readTime}
+        </p>
+        <h1 className="font-display text-3xl md:text-5xl font-bold mb-10">{post.title}</h1>
+        <article className="prose prose-neutral dark:prose-invert max-w-none prose-headings:font-display prose-a:text-primary prose-code:bg-muted prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-pre:bg-muted prose-pre:border prose-pre:border-border">
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>{post.content}</ReactMarkdown>
+        </article>
       </motion.div>
     </div>
   );
