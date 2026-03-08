@@ -1,26 +1,24 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, LogIn, LogOut } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { useAuth } from '@/lib/auth';
+import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinks = [
-  { to: '/', label: 'Home' },
+  { to: '/', label: 'About Me' },
+  { to: '/resume', label: 'Resume' },
   { to: '/projects', label: 'Projects' },
-  { to: '/blog', label: 'Blog' },
+  { to: '/contact', label: 'Contact' },
 ];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const { user, isAdmin, signOut } = useAuth();
   const location = useLocation();
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-background/80 backdrop-blur-md">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-sm">
       <div className="container flex h-16 items-center justify-between">
-        <Link to="/" className="font-display text-xl font-bold tracking-tight text-foreground">
-          <span className="text-primary">Your</span>Brand
+        <Link to="/" className="font-display text-lg font-bold tracking-tight text-foreground">
+          Bhuvan <span className="font-normal text-muted-foreground">N.R</span>
         </Link>
 
         {/* Desktop */}
@@ -29,39 +27,18 @@ export default function Navbar() {
             <Link
               key={link.to}
               to={link.to}
-              className={`text-sm font-medium transition-colors hover:text-primary ${
-                location.pathname === link.to ? 'text-primary' : 'text-muted-foreground'
+              className={`text-sm tracking-wide transition-colors hover:text-foreground ${
+                location.pathname === link.to ? 'text-foreground font-medium' : 'text-muted-foreground'
               }`}
             >
               {link.label}
             </Link>
           ))}
-          {isAdmin && (
-            <Link
-              to="/admin"
-              className={`text-sm font-medium transition-colors hover:text-primary ${
-                location.pathname.startsWith('/admin') ? 'text-primary' : 'text-muted-foreground'
-              }`}
-            >
-              Admin
-            </Link>
-          )}
-          {user ? (
-            <Button variant="ghost" size="sm" onClick={signOut}>
-              <LogOut className="h-4 w-4 mr-1" /> Logout
-            </Button>
-          ) : (
-            <Link to="/login">
-              <Button variant="ghost" size="sm">
-                <LogIn className="h-4 w-4 mr-1" /> Login
-              </Button>
-            </Link>
-          )}
         </div>
 
         {/* Mobile toggle */}
         <button className="md:hidden text-foreground" onClick={() => setOpen(!open)}>
-          {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </div>
 
@@ -80,29 +57,13 @@ export default function Navbar() {
                   key={link.to}
                   to={link.to}
                   onClick={() => setOpen(false)}
-                  className={`text-sm font-medium py-2 ${
-                    location.pathname === link.to ? 'text-primary' : 'text-muted-foreground'
+                  className={`text-sm py-2 ${
+                    location.pathname === link.to ? 'text-foreground font-medium' : 'text-muted-foreground'
                   }`}
                 >
                   {link.label}
                 </Link>
               ))}
-              {isAdmin && (
-                <Link to="/admin" onClick={() => setOpen(false)} className="text-sm font-medium py-2 text-muted-foreground">
-                  Admin
-                </Link>
-              )}
-              {user ? (
-                <Button variant="ghost" size="sm" onClick={() => { signOut(); setOpen(false); }}>
-                  <LogOut className="h-4 w-4 mr-1" /> Logout
-                </Button>
-              ) : (
-                <Link to="/login" onClick={() => setOpen(false)}>
-                  <Button variant="ghost" size="sm">
-                    <LogIn className="h-4 w-4 mr-1" /> Login
-                  </Button>
-                </Link>
-              )}
             </div>
           </motion.div>
         )}
