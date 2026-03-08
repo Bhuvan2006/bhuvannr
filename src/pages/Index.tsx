@@ -150,9 +150,7 @@ export default function Index() {
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-6">
-            {featuredProjects.map((project, i) => {
-              const Icon = project.icon;
-              return (
+            {featuredProjects.map((project, i) => (
                 <motion.a
                   key={project.title}
                   href={project.github}
@@ -162,26 +160,17 @@ export default function Index() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.12 }}
-                  className="group block h-full p-6 rounded-xl border border-border bg-card hover:border-foreground/20 transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+                  className="group block h-full rounded-xl border border-border bg-card overflow-hidden hover:border-foreground/20 transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
                 >
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="p-2 rounded-lg bg-secondary text-foreground">
-                      <Icon className="h-5 w-5" />
-                    </div>
-                    <Github className="h-4 w-4 ml-auto text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="aspect-[4/3] overflow-hidden">
+                    <img src={project.image} alt={project.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                   </div>
-                  <h3 className="font-display font-semibold text-lg mb-2">{project.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed mb-4">{project.description}</p>
-                  <div className="flex flex-wrap gap-1.5 mt-auto">
-                    {project.tags.map((tag) => (
-                      <Badge key={tag} variant="secondary" className="text-xs font-normal">
-                        {tag}
-                      </Badge>
-                    ))}
+                  <div className="p-5">
+                    <h3 className="font-display font-semibold text-lg mb-2">{project.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{project.description}</p>
                   </div>
                 </motion.a>
-              );
-            })}
+            ))}
           </div>
 
           <Link to="/projects" className="md:hidden flex items-center justify-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors mt-8">
