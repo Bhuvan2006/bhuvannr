@@ -9,7 +9,7 @@ export default function Footer() {
         </p>
         <div className="flex gap-3">
           {[
-            { icon: Github, href: '#', label: 'GitHub' },
+            { icon: Github, href: 'https://github.com/Bhuvan2006', label: 'GitHub' },
             { icon: Linkedin, href: 'https://www.linkedin.com/in/bhuvan-n-r/', label: 'LinkedIn' },
             { icon: Twitter, href: 'https://x.com/Bhuvan_N_R', label: 'Twitter' },
             { icon: Mail, href: 'mailto:bhuvannr2006@gmail.com', label: 'Email' },
