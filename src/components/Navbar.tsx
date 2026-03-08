@@ -52,7 +52,7 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden border-t border-border bg-background"
+            className="md:hidden border-t border-border/50 bg-background/60 backdrop-blur-md"
           >
             <div className="container py-4 flex flex-col gap-3">
               {navLinks.map((link) => (
