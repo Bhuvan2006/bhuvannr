@@ -10,8 +10,8 @@ const fadeUp = {
 
 const socialLinks = [
   { icon: Github, href: '#', label: 'GitHub', hoverClass: 'hover:text-foreground hover:bg-foreground/10' },
-  { icon: Linkedin, href: '#', label: 'LinkedIn', hoverClass: 'hover:text-[#0A66C2] hover:bg-[#0A66C2]/10' },
-  { icon: Twitter, href: '#', label: 'Twitter', hoverClass: 'hover:text-[#1DA1F2] hover:bg-[#1DA1F2]/10' },
+  { icon: Linkedin, href: 'https://www.linkedin.com/in/bhuvan-n-r/', label: 'LinkedIn', hoverClass: 'hover:text-[#0A66C2] hover:bg-[#0A66C2]/10' },
+  { icon: Twitter, href: 'https://x.com/Bhuvan_N_R', label: 'Twitter', hoverClass: 'hover:text-[#1DA1F2] hover:bg-[#1DA1F2]/10' },
   { icon: Mail, href: '#', label: 'Email', hoverClass: 'hover:text-[#EA4335] hover:bg-[#EA4335]/10' },
 ];
 
