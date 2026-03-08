@@ -7,6 +7,7 @@ import { AuthProvider } from "@/lib/auth";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import LeadPopup from "@/components/LeadPopup";
+import Home from "./pages/Home";
 import Index from "./pages/Index";
 import Resume from "./pages/Resume";
 import Projects from "./pages/Projects";
@@ -28,7 +29,8 @@ const App = () => (
         <AuthProvider>
           <Navbar />
           <Routes>
-            <Route path="/" element={<Index />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<Index />} />
             <Route path="/resume" element={<Resume />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/contact" element={<Contact />} />
