@@ -142,11 +142,24 @@ export default function Index() {
             </Link>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            {featuredProjects.map((project, i) => (
+          {projectsLoading ? (
+            <div className="grid md:grid-cols-3 gap-6">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="rounded-xl border border-border bg-card overflow-hidden">
+                  <div className="aspect-[4/3] bg-secondary animate-pulse" />
+                  <div className="p-5 space-y-3">
+                    <div className="h-5 w-2/3 bg-secondary animate-pulse rounded" />
+                    <div className="h-4 w-full bg-secondary animate-pulse rounded" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : projects && projects.length > 0 ? (
+            <div className="grid md:grid-cols-3 gap-6">
+              {projects.map((project, i) => (
                 <motion.a
-                  key={project.title}
-                  href={project.github}
+                  key={project.id}
+                  href={project.github_url || project.link || '#'}
                   target="_blank"
                   rel="noopener noreferrer"
                   initial={{ opacity: 0, y: 30 }}
@@ -155,16 +168,19 @@ export default function Index() {
                   transition={{ duration: 0.5, delay: i * 0.12 }}
                   className="group block h-full rounded-xl border border-border bg-card overflow-hidden hover:border-foreground/20 transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
                 >
-                  <div className="aspect-[4/3] overflow-hidden">
-                    <img src={project.image} alt={project.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                  <div className="aspect-[4/3] overflow-hidden bg-secondary">
+                    <img src={project.image_url || placeholderImg} alt={project.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                   </div>
                   <div className="p-5">
                     <h3 className="font-display font-semibold text-lg mb-2">{project.title}</h3>
                     <p className="text-sm text-muted-foreground leading-relaxed">{project.description}</p>
                   </div>
                 </motion.a>
-            ))}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-muted-foreground text-center">No projects yet.</p>
+          )}
 
           <Link to="/projects" className="md:hidden flex items-center justify-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors mt-8">
             View all projects <ArrowRight className="h-4 w-4" />
