@@ -28,8 +28,10 @@ export default function Navbar() {
             <Link
               key={link.to}
               to={link.to}
-              className={`text-sm tracking-wide transition-colors hover:text-foreground ${
-                location.pathname === link.to ? 'text-foreground font-medium' : 'text-muted-foreground'
+              className={`relative text-sm tracking-wide transition-all duration-300 hover:text-foreground after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:h-[2px] after:bg-foreground after:transition-all after:duration-300 ${
+                location.pathname === link.to
+                  ? 'text-foreground font-medium after:w-full'
+                  : 'text-muted-foreground after:w-0 hover:after:w-full'
               }`}
             >
               {link.label}
@@ -58,8 +60,10 @@ export default function Navbar() {
                   key={link.to}
                   to={link.to}
                   onClick={() => setOpen(false)}
-                  className={`text-sm py-2 ${
-                    location.pathname === link.to ? 'text-foreground font-medium' : 'text-muted-foreground'
+                  className={`text-sm py-2 rounded-md px-3 -mx-3 transition-all duration-200 active:scale-[0.97] ${
+                    location.pathname === link.to
+                      ? 'text-foreground font-medium bg-secondary'
+                      : 'text-muted-foreground hover:text-foreground hover:bg-secondary/60'
                   }`}
                 >
                   {link.label}

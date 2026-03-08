@@ -33,7 +33,12 @@ export default function Index() {
             { icon: Mail, href: '#', label: 'Email' },
           ].map(({ icon: Icon, href, label }) => (
             <a key={label} href={href} target="_blank" rel="noopener noreferrer"
-              className="p-2.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+              className={`p-2.5 rounded-md transition-all duration-300 hover:scale-110 hover:shadow-md ${
+                label === 'GitHub' ? 'text-muted-foreground hover:text-foreground hover:bg-foreground/10' :
+                label === 'LinkedIn' ? 'text-muted-foreground hover:text-[#0A66C2] hover:bg-[#0A66C2]/10' :
+                label === 'Twitter' ? 'text-muted-foreground hover:text-[#1DA1F2] hover:bg-[#1DA1F2]/10' :
+                'text-muted-foreground hover:text-[#EA4335] hover:bg-[#EA4335]/10'
+              }`}
               aria-label={label}>
               <Icon className="h-5 w-5" />
             </a>

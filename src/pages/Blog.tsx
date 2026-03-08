@@ -22,16 +22,16 @@ export default function Blog() {
                 transition={{ delay: i * 0.08 }}
                 className="py-8 first:pt-0"
               >
-                <Link to={`/blog/${post.slug}`} className="group block">
-                  <h2 className="font-display text-xl md:text-2xl font-semibold mb-1 group-hover:underline underline-offset-4 decoration-primary/60 transition-colors">
+                <Link to={`/blog/${post.slug}`} className="group block rounded-lg -mx-4 px-4 py-2 transition-all duration-300 hover:bg-secondary/60 hover:shadow-sm active:scale-[0.99]">
+                  <h2 className="font-display text-xl md:text-2xl font-semibold mb-1 transition-colors duration-300 group-hover:text-primary">
                     {post.title}
                   </h2>
                   <p className="text-sm text-muted-foreground mb-3">
                     {post.date} · {post.readTime}
                   </p>
                   <p className="text-muted-foreground leading-relaxed">{post.excerpt}</p>
-                  <span className="inline-block text-sm text-primary mt-3 group-hover:underline">
-                    Read more »
+                  <span className="inline-flex items-center gap-1 text-sm text-primary mt-3 transition-transform duration-300 group-hover:translate-x-1">
+                    Read more →
                   </span>
                 </Link>
               </motion.article>

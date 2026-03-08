@@ -15,7 +15,12 @@ export default function Footer() {
             { icon: Mail, href: 'mailto:bhuvannr2006@gmail.com', label: 'Email' },
           ].map(({ icon: Icon, href, label }) => (
             <a key={label} href={href} target="_blank" rel="noopener noreferrer"
-              className="p-2 text-muted-foreground hover:text-foreground transition-colors" aria-label={label}>
+              className={`p-2 transition-all duration-300 hover:scale-110 ${
+                label === 'GitHub' ? 'text-muted-foreground hover:text-foreground' :
+                label === 'LinkedIn' ? 'text-muted-foreground hover:text-[#0A66C2]' :
+                label === 'Twitter' ? 'text-muted-foreground hover:text-[#1DA1F2]' :
+                'text-muted-foreground hover:text-[#EA4335]'
+              }`} aria-label={label}>
               <Icon className="h-4 w-4" />
             </a>
           ))}
