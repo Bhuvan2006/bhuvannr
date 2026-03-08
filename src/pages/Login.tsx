@@ -42,14 +42,20 @@ export default function Login() {
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="w-full max-w-sm mx-auto p-8">
-        <h1 className="font-display text-2xl font-bold mb-6 text-center">Admin Login</h1>
+        <h1 className="font-display text-2xl font-bold mb-6 text-center">{isSignUp ? 'Create Account' : 'Sign In'}</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <Input placeholder="Email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
           <Input placeholder="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
           <Button type="submit" className="w-full" disabled={loading}>
-            {loading ? 'Signing in...' : 'Sign In'}
+            {loading ? (isSignUp ? 'Creating...' : 'Signing in...') : (isSignUp ? 'Sign Up' : 'Sign In')}
           </Button>
         </form>
+        <p className="text-center text-sm text-muted-foreground mt-4">
+          {isSignUp ? 'Already have an account?' : "Don't have an account?"}{' '}
+          <button type="button" onClick={() => setIsSignUp(!isSignUp)} className="text-primary underline">
+            {isSignUp ? 'Sign In' : 'Sign Up'}
+          </button>
+        </p>
       </div>
     </div>
   );
