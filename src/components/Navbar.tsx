@@ -60,8 +60,10 @@ export default function Navbar() {
                   key={link.to}
                   to={link.to}
                   onClick={() => setOpen(false)}
-                  className={`text-sm py-2 ${
-                    location.pathname === link.to ? 'text-foreground font-medium' : 'text-muted-foreground'
+                  className={`text-sm py-2 rounded-md px-3 -mx-3 transition-all duration-200 active:scale-[0.97] ${
+                    location.pathname === link.to
+                      ? 'text-foreground font-medium bg-secondary'
+                      : 'text-muted-foreground hover:text-foreground hover:bg-secondary/60'
                   }`}
                 >
                   {link.label}
