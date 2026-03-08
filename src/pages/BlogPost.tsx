@@ -2,8 +2,9 @@ import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { motion } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
 import { getPostBySlug } from '@/lib/blog';
+import BlogActions from '@/components/blog/BlogActions';
+import BlogComments from '@/components/blog/BlogComments';
 
 export default function BlogPost() {
   const { slug } = useParams<{ slug: string }>();
@@ -28,8 +29,11 @@ export default function BlogPost() {
         </p>
         <h1 className="font-display text-3xl md:text-5xl font-bold mb-10">{post.title}</h1>
         <article className="prose prose-neutral dark:prose-invert max-w-none prose-headings:font-display prose-a:text-primary prose-code:bg-muted prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-pre:bg-muted prose-pre:border prose-pre:border-border">
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>{post.content}</ReactMarkdown>
+          <ReactMarkdown>{post.content}</ReactMarkdown>
         </article>
+
+        <BlogActions slug={post.slug} title={post.title} />
+        <BlogComments slug={post.slug} />
       </motion.div>
     </div>
   );
