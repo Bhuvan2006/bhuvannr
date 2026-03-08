@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Twitter, Mail, ArrowRight } from 'lucide-react';
+import profileImg from '@/assets/profile.jpeg';
 import { Link } from 'react-router-dom';
 
 const fadeUp = {
@@ -48,8 +49,8 @@ export default function Index() {
             transition={{ duration: 0.7, ease: 'easeOut' }}
             className="flex justify-center md:justify-end"
           >
-            <div className="w-72 h-72 md:w-96 md:h-96 rounded-2xl bg-secondary border border-border flex items-center justify-center overflow-hidden relative">
-              <span className="text-muted-foreground text-sm">Photo</span>
+            <div className="w-72 h-72 md:w-96 md:h-96 rounded-2xl bg-secondary border border-border overflow-hidden relative">
+              <img src={profileImg} alt="Bhuvan N.R" className="w-full h-full object-cover" />
               {/* Decorative accent */}
               <div className="absolute -bottom-2 -right-2 w-72 h-72 md:w-96 md:h-96 rounded-2xl border-2 border-accent -z-10" />
             </div>
