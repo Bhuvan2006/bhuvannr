@@ -1,10 +1,9 @@
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Twitter, Mail, ArrowRight } from 'lucide-react';
 import profileImg from '@/assets/profile.jpeg';
-import projectNeuralImg from '@/assets/project-neural-style.jpg';
-import projectSentimentImg from '@/assets/project-sentiment.jpg';
-import projectHealthImg from '@/assets/project-health.jpg';
 import { Link } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import { supabase } from '@/integrations/supabase/client';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -18,26 +17,7 @@ const socialLinks = [
   { icon: Mail, href: '#', label: 'Email', hoverClass: 'hover:text-[#EA4335] hover:bg-[#EA4335]/10' },
 ];
 
-const featuredProjects = [
-  {
-    title: "Neural Style Transfer",
-    description: "A deep learning model that applies the artistic style of one image to the content of another using convolutional neural networks and VGG19 feature extraction.",
-    image: projectNeuralImg,
-    github: "https://github.com/Bhuvan2006",
-  },
-  {
-    title: "Sentiment Analysis Engine",
-    description: "NLP pipeline for real-time sentiment classification of social media text using transformer-based models with 94% accuracy on benchmark datasets.",
-    image: projectSentimentImg,
-    github: "https://github.com/Bhuvan2006",
-  },
-  {
-    title: "Predictive Health Monitor",
-    description: "ML system that predicts patient health risks from clinical data using ensemble methods, featuring an interactive dashboard for medical professionals.",
-    image: projectHealthImg,
-    github: "https://github.com/Bhuvan2006",
-  },
-];
+const placeholderImg = '/placeholder.svg';
 
 const ctaSections = [
   {
@@ -61,6 +41,19 @@ const ctaSections = [
 ];
 
 export default function Index() {
+  const { data: projects, isLoading: projectsLoading } = useQuery({
+    queryKey: ['projects'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('projects')
+        .select('*')
+        .order('display_order', { ascending: true })
+        .limit(3);
+      if (error) throw error;
+      return data;
+    },
+  });
+
   return (
     <div className="min-h-screen">
       {/* Hero — split layout inspired by SheRocks */}
@@ -149,11 +142,24 @@ export default function Index() {
             </Link>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            {featuredProjects.map((project, i) => (
+          {projectsLoading ? (
+            <div className="grid md:grid-cols-3 gap-6">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="rounded-xl border border-border bg-card overflow-hidden">
+                  <div className="aspect-[4/3] bg-secondary animate-pulse" />
+                  <div className="p-5 space-y-3">
+                    <div className="h-5 w-2/3 bg-secondary animate-pulse rounded" />
+                    <div className="h-4 w-full bg-secondary animate-pulse rounded" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : projects && projects.length > 0 ? (
+            <div className="grid md:grid-cols-3 gap-6">
+              {projects.map((project, i) => (
                 <motion.a
-                  key={project.title}
-                  href={project.github}
+                  key={project.id}
+                  href={project.github_url || project.link || '#'}
                   target="_blank"
                   rel="noopener noreferrer"
                   initial={{ opacity: 0, y: 30 }}
@@ -162,16 +168,19 @@ export default function Index() {
                   transition={{ duration: 0.5, delay: i * 0.12 }}
                   className="group block h-full rounded-xl border border-border bg-card overflow-hidden hover:border-foreground/20 transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
                 >
-                  <div className="aspect-[4/3] overflow-hidden">
-                    <img src={project.image} alt={project.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                  <div className="aspect-[4/3] overflow-hidden bg-secondary">
+                    <img src={project.image_url || placeholderImg} alt={project.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                   </div>
                   <div className="p-5">
                     <h3 className="font-display font-semibold text-lg mb-2">{project.title}</h3>
                     <p className="text-sm text-muted-foreground leading-relaxed">{project.description}</p>
                   </div>
                 </motion.a>
-            ))}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-muted-foreground text-center">No projects yet.</p>
+          )}
 
           <Link to="/projects" className="md:hidden flex items-center justify-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors mt-8">
             View all projects <ArrowRight className="h-4 w-4" />
