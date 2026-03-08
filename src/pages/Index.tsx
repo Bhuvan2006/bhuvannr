@@ -41,6 +41,19 @@ const ctaSections = [
 ];
 
 export default function Index() {
+  const { data: projects, isLoading: projectsLoading } = useQuery({
+    queryKey: ['projects'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('projects')
+        .select('*')
+        .order('display_order', { ascending: true })
+        .limit(3);
+      if (error) throw error;
+      return data;
+    },
+  });
+
   return (
     <div className="min-h-screen">
       {/* Hero — split layout inspired by SheRocks */}
