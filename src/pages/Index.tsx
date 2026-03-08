@@ -21,7 +21,7 @@ export default function Index() {
             Hello, I'm
           </motion.p>
           <motion.h1 custom={1} variants={fadeUp} initial="hidden" animate="visible" className="font-display text-5xl md:text-7xl font-bold tracking-tight mb-6">
-            Your Name
+            Bhuvan N.R
           </motion.h1>
           <motion.p custom={2} variants={fadeUp} initial="hidden" animate="visible" className="text-xl md:text-2xl text-muted-foreground max-w-2xl mb-8 leading-relaxed">
             A creative developer building modern digital experiences. I turn ideas into polished, performant products.
