@@ -16,7 +16,7 @@ export default function Navbar() {
   const location = useLocation();
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-sm">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/60 backdrop-blur-md border-b border-border/50">
       <div className="container flex h-16 items-center justify-between">
         <Link to="/" className="font-display text-lg font-bold tracking-tight text-foreground">
           Bhuvan <span className="font-normal text-muted-foreground">N.R</span>
