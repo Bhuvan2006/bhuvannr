@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Twitter, Mail, ArrowRight } from 'lucide-react';
+import profileImg from '@/assets/profile.jpeg';
 import { Link } from 'react-router-dom';
 
 const fadeUp = {
