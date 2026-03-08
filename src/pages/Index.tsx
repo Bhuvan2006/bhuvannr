@@ -1,10 +1,9 @@
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Twitter, Mail, ArrowRight } from 'lucide-react';
 import profileImg from '@/assets/profile.jpeg';
-import projectNeuralImg from '@/assets/project-neural-style.jpg';
-import projectSentimentImg from '@/assets/project-sentiment.jpg';
-import projectHealthImg from '@/assets/project-health.jpg';
 import { Link } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import { supabase } from '@/integrations/supabase/client';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
