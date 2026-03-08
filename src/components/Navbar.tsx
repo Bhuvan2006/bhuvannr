@@ -28,8 +28,10 @@ export default function Navbar() {
             <Link
               key={link.to}
               to={link.to}
-              className={`text-sm tracking-wide transition-colors hover:text-foreground ${
-                location.pathname === link.to ? 'text-foreground font-medium' : 'text-muted-foreground'
+              className={`relative text-sm tracking-wide transition-all duration-300 hover:text-foreground after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:h-[2px] after:bg-foreground after:transition-all after:duration-300 ${
+                location.pathname === link.to
+                  ? 'text-foreground font-medium after:w-full'
+                  : 'text-muted-foreground after:w-0 hover:after:w-full'
               }`}
             >
               {link.label}
