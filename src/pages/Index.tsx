@@ -16,6 +16,30 @@ const socialLinks = [
   { icon: Mail, href: '#', label: 'Email', hoverClass: 'hover:text-[#EA4335] hover:bg-[#EA4335]/10' },
 ];
 
+const featuredProjects = [
+  {
+    title: "Neural Style Transfer",
+    description: "A deep learning model that applies the artistic style of one image to the content of another using convolutional neural networks and VGG19 feature extraction.",
+    tags: ["Python", "PyTorch", "CNN", "Computer Vision"],
+    icon: Eye,
+    github: "https://github.com/Bhuvan2006",
+  },
+  {
+    title: "Sentiment Analysis Engine",
+    description: "NLP pipeline for real-time sentiment classification of social media text using transformer-based models with 94% accuracy on benchmark datasets.",
+    tags: ["Python", "Transformers", "NLP", "HuggingFace"],
+    icon: MessageSquare,
+    github: "https://github.com/Bhuvan2006",
+  },
+  {
+    title: "Predictive Health Monitor",
+    description: "ML system that predicts patient health risks from clinical data using ensemble methods, featuring an interactive dashboard for medical professionals.",
+    tags: ["Python", "Scikit-learn", "React", "FastAPI"],
+    icon: Brain,
+    github: "https://github.com/Bhuvan2006",
+  },
+];
+
 const ctaSections = [
   {
     title: "Curious about my journey?",
