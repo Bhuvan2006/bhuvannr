@@ -15,7 +15,8 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const { signIn } = useAuth();
+  const [isSignUp, setIsSignUp] = useState(false);
+  const { signIn, signUp } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -26,27 +27,35 @@ export default function Login() {
       return;
     }
     setLoading(true);
-    const { error } = await signIn(result.data.email, result.data.password);
+    const { error } = isSignUp
+      ? await signUp(result.data.email, result.data.password)
+      : await signIn(result.data.email, result.data.password);
     setLoading(false);
     if (error) {
-      toast.error('Invalid credentials');
+      toast.error(isSignUp ? 'Signup failed' : 'Invalid credentials');
       return;
     }
-    toast.success('Logged in!');
-    navigate('/admin');
+    toast.success(isSignUp ? 'Account created!' : 'Logged in!');
+    navigate(isSignUp ? '/' : '/admin');
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="w-full max-w-sm mx-auto p-8">
-        <h1 className="font-display text-2xl font-bold mb-6 text-center">Admin Login</h1>
+        <h1 className="font-display text-2xl font-bold mb-6 text-center">{isSignUp ? 'Create Account' : 'Sign In'}</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <Input placeholder="Email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
           <Input placeholder="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
           <Button type="submit" className="w-full" disabled={loading}>
-            {loading ? 'Signing in...' : 'Sign In'}
+            {loading ? (isSignUp ? 'Creating...' : 'Signing in...') : (isSignUp ? 'Sign Up' : 'Sign In')}
           </Button>
         </form>
+        <p className="text-center text-sm text-muted-foreground mt-4">
+          {isSignUp ? 'Already have an account?' : "Don't have an account?"}{' '}
+          <button type="button" onClick={() => setIsSignUp(!isSignUp)} className="text-primary underline">
+            {isSignUp ? 'Sign In' : 'Sign Up'}
+          </button>
+        </p>
       </div>
     </div>
   );
