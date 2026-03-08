@@ -27,14 +27,16 @@ export default function Login() {
       return;
     }
     setLoading(true);
-    const { error } = await signIn(result.data.email, result.data.password);
+    const { error } = isSignUp
+      ? await signUp(result.data.email, result.data.password)
+      : await signIn(result.data.email, result.data.password);
     setLoading(false);
     if (error) {
-      toast.error('Invalid credentials');
+      toast.error(isSignUp ? 'Signup failed' : 'Invalid credentials');
       return;
     }
-    toast.success('Logged in!');
-    navigate('/admin');
+    toast.success(isSignUp ? 'Account created!' : 'Logged in!');
+    navigate(isSignUp ? '/' : '/admin');
   };
 
   return (
