@@ -131,6 +131,66 @@ export default function Index() {
         </div>
       </section>
 
+      {/* Featured Projects — Portfolio style like Diogo TC */}
+      <section className="border-t border-border">
+        <div className="container max-w-5xl py-20">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="flex items-end justify-between mb-10"
+          >
+            <div>
+              <h2 className="font-display text-3xl font-bold mb-2">Featured Projects</h2>
+              <p className="text-muted-foreground">A few highlights from my ML & AI work.</p>
+            </div>
+            <Link to="/projects" className="hidden md:inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+              View all <ArrowRight className="h-4 w-4" />
+            </Link>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {featuredProjects.map((project, i) => {
+              const Icon = project.icon;
+              return (
+                <motion.a
+                  key={project.title}
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.12 }}
+                  className="group block h-full p-6 rounded-xl border border-border bg-card hover:border-foreground/20 transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+                >
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-2 rounded-lg bg-secondary text-foreground">
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <Github className="h-4 w-4 ml-auto text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </div>
+                  <h3 className="font-display font-semibold text-lg mb-2">{project.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-4">{project.description}</p>
+                  <div className="flex flex-wrap gap-1.5 mt-auto">
+                    {project.tags.map((tag) => (
+                      <Badge key={tag} variant="secondary" className="text-xs font-normal">
+                        {tag}
+                      </Badge>
+                    ))}
+                  </div>
+                </motion.a>
+              );
+            })}
+          </div>
+
+          <Link to="/projects" className="md:hidden flex items-center justify-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors mt-8">
+            View all projects <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+      </section>
+
       {/* CTA Cards — inspired by SheRocks bottom sections */}
       <section className="border-t border-border">
         <div className="container max-w-5xl py-20">
