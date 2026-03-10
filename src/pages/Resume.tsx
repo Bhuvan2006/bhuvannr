@@ -4,38 +4,50 @@ import { Button } from '@/components/ui/button';
 
 const experience = [
   {
-    role: 'Full Stack Developer',
-    company: 'TechCorp Inc.',
-    period: '2023 – Present',
-    description: 'Building scalable web applications using React, Node.js, and cloud services. Leading a team of 4 developers on client-facing projects.',
+    role: 'Full-stack Developer',
+    company: 'KrowdKraft',
+    period: 'Jan 2026 – Present',
+    description: 'Building full-stack applications and contributing to product development in a collaborative startup environment.',
   },
   {
-    role: 'Frontend Developer',
-    company: 'StartupXYZ',
-    period: '2021 – 2023',
-    description: 'Developed responsive interfaces and design systems. Improved page load times by 40% through optimization.',
+    role: 'Management Staff',
+    company: 'AI_WORKS@DSU',
+    period: 'Jan 2025 – Present',
+    description: 'Active member and management staff of the AI_Works club, participating in networking events and taking initiative in team and leadership roles.',
   },
   {
-    role: 'Junior Developer',
-    company: 'Digital Agency Co.',
-    period: '2020 – 2021',
-    description: 'Built websites and web apps for various clients. Gained experience with modern JavaScript frameworks.',
+    role: 'Intern',
+    company: 'National Institute of Technology Puducherry',
+    period: 'May 2025 – Jul 2025',
+    description: 'Conducted field interviews with truck drivers for a road safety research initiative. Collected and analyzed data to identify key risk factors and contributed to a Road Safety Audit Report with practical safety recommendations.',
+  },
+  {
+    role: 'Student Intern',
+    company: 'Humans Care Foundation',
+    period: 'Feb 2025 – Mar 2025',
+    description: 'Gained hands-on experience through a student internship program focused on community impact and social initiatives.',
   },
 ];
 
 const education = [
   {
-    degree: 'B.Tech in Computer Science',
-    school: 'National Institute of Technology',
-    period: '2016 – 2020',
-    description: 'Graduated with distinction. Focused on software engineering and data structures.',
+    degree: 'Bachelor of Technology - BTech, Computer Science',
+    school: 'Dayananda Sagar University',
+    period: 'Sep 2024 – Dec 2028',
+    description: 'Pursuing B.Tech in Computer Science with a strong interest in Web Development and Machine Learning.',
+  },
+  {
+    degree: 'PCMC',
+    school: 'Christ Academy Junior College',
+    period: 'Jun 2022 – Mar 2024',
+    description: 'Completed pre-university education with a focus on Physics, Chemistry, Mathematics, and Computer Science.',
   },
 ];
 
 const certifications = [
-  'AWS Certified Solutions Architect',
-  'Google Cloud Professional Developer',
-  'Meta Front-End Developer Certificate',
+  'Programming In Java',
+  'Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate',
+  'Aurora Tech Fest 2025 – Codethon',
 ];
 
 const fadeUp = {

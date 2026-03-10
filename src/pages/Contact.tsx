@@ -76,7 +76,7 @@ export default function Contact() {
               <Phone className="h-5 w-5 text-muted-foreground mt-0.5" />
               <div>
                 <p className="text-sm font-medium">Phone</p>
-                <p className="text-sm text-muted-foreground">Available on request</p>
+                <p className="text-sm text-muted-foreground">+91 9492804745</p>
               </div>
             </div>
           </motion.div>

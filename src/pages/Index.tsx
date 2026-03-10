@@ -225,7 +225,7 @@ export default function Index() {
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
             <h2 className="font-display text-2xl font-bold mb-6 text-center">Skills & Technologies</h2>
             <div className="flex flex-wrap gap-2 justify-center">
-              {['React', 'TypeScript', 'Node.js', 'PostgreSQL', 'Tailwind CSS', 'Python', 'Git', 'Docker', 'AWS'].map((skill) => (
+              {['Front-End Development', 'React', 'TypeScript', 'Python', 'Java', 'C', 'HTML/CSS', 'JavaScript', 'Data Structures', 'Machine Learning', 'Tailwind CSS', 'Git'].map((skill) => (
                 <span key={skill} className="px-4 py-2 rounded-full text-xs font-medium bg-secondary text-foreground border border-border hover:bg-accent transition-colors duration-200">
                   {skill}
                 </span>
