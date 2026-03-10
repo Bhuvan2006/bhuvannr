@@ -62,7 +62,7 @@ export default function Contact() {
               <Mail className="h-5 w-5 text-muted-foreground mt-0.5" />
               <div>
                 <p className="text-sm font-medium">Email</p>
-                <p className="text-sm text-muted-foreground">bhuvannr2006@gmail.com</p>
+                <a href="mailto:bhuvannr2006@gmail.com" className="text-sm text-muted-foreground hover:text-foreground transition-colors">bhuvannr2006@gmail.com</a>
               </div>
             </div>
             <div className="flex items-start gap-3">
