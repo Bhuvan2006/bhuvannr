@@ -85,7 +85,7 @@ export default function Index() {
             </motion.h1>
             <motion.p custom={2} variants={fadeUp} initial="hidden" animate="visible"
               className="font-display text-xl md:text-2xl text-muted-foreground font-medium mb-6">
-              Creative Developer
+              B.Tech CSE Student & Developer
             </motion.p>
             <motion.p custom={3} variants={fadeUp} initial="hidden" animate="visible"
               className="text-muted-foreground leading-relaxed max-w-md mx-auto md:mx-0 mb-8">
