@@ -85,11 +85,11 @@ export default function Index() {
             </motion.h1>
             <motion.p custom={2} variants={fadeUp} initial="hidden" animate="visible"
               className="font-display text-xl md:text-2xl text-muted-foreground font-medium mb-6">
-              Creative Developer
+              B.Tech CSE Student & Developer
             </motion.p>
             <motion.p custom={3} variants={fadeUp} initial="hidden" animate="visible"
               className="text-muted-foreground leading-relaxed max-w-md mx-auto md:mx-0 mb-8">
-              I craft modern, performant digital experiences — turning ideas into clean, elegant products that make a difference.
+              I'm a Computer Science student at Dayananda Sagar University with a strong interest in Web Development and Machine Learning. I thrive in collaborative environments and love turning ideas into elegant solutions.
             </motion.p>
 
             {/* Social icons */}
@@ -116,9 +116,7 @@ export default function Index() {
             transition={{ duration: 0.6 }}
             className="text-lg md:text-xl text-muted-foreground leading-relaxed"
           >
-            <span className="text-foreground font-semibold">I'm a passionate developer</span> with a knack for crafting elegant solutions
-            to complex problems. With experience building web applications, I specialize in creating seamless user experiences
-            backed by robust architectures.
+            <span className="text-foreground font-semibold">I'm a Computer Science UG Engineering student</span> at Dayananda Sagar University with a strong interest in Web Development and Machine Learning. Currently building my foundation with Python, Java, C, HTML, CSS and JS, and gaining real-world exposure through internships at NIT Puducherry and HCF. With a humble mindset, a curious spirit, and a constant drive to learn, I thrive in collaborative environments.
           </motion.p>
         </div>
       </section>
@@ -227,7 +225,7 @@ export default function Index() {
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
             <h2 className="font-display text-2xl font-bold mb-6 text-center">Skills & Technologies</h2>
             <div className="flex flex-wrap gap-2 justify-center">
-              {['React', 'TypeScript', 'Node.js', 'PostgreSQL', 'Tailwind CSS', 'Python', 'Git', 'Docker', 'AWS'].map((skill) => (
+              {['Front-End Development', 'React', 'TypeScript', 'Python', 'Java', 'C', 'HTML/CSS', 'JavaScript', 'Data Structures', 'Machine Learning', 'Tailwind CSS', 'Git'].map((skill) => (
                 <span key={skill} className="px-4 py-2 rounded-full text-xs font-medium bg-secondary text-foreground border border-border hover:bg-accent transition-colors duration-200">
                   {skill}
                 </span>
