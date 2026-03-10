@@ -69,7 +69,7 @@ export default function Contact() {
               <MapPin className="h-5 w-5 text-muted-foreground mt-0.5" />
               <div>
                 <p className="text-sm font-medium">Location</p>
-                <p className="text-sm text-muted-foreground">India</p>
+                <p className="text-sm text-muted-foreground">Glass Factory Layout, Kammasandra, Anekal, Bengaluru 560100</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
