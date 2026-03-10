@@ -170,7 +170,10 @@ export default function Index() {
                     <img src={project.image_url || placeholderImg} alt={project.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                   </div>
                   <div className="p-5">
-                    <h3 className="font-display font-semibold text-lg mb-2">{project.title}</h3>
+                    <div className="flex items-center gap-2 mb-2">
+                      {project.github_url && <Github className="h-4 w-4 text-muted-foreground" />}
+                      <h3 className="font-display font-semibold text-lg">{project.title}</h3>
+                    </div>
                     <p className="text-sm text-muted-foreground leading-relaxed">{project.description}</p>
                   </div>
                 </motion.a>
