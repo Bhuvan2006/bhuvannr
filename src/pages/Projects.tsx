@@ -53,19 +53,15 @@ export default function Projects() {
                 </div>
                 <div className="p-5">
                   <div className="flex items-start justify-between gap-3 mb-2">
-                    <h3 className="font-display font-semibold text-lg">{project.title}</h3>
-                    <div className="flex gap-1.5 shrink-0">
-                      {project.github_url && (
-                        <a href={project.github_url} target="_blank" rel="noopener noreferrer" className="p-1.5 text-muted-foreground hover:text-foreground transition-colors">
-                          <Github className="h-4 w-4" />
-                        </a>
-                      )}
-                      {project.link && (
-                        <a href={project.link} target="_blank" rel="noopener noreferrer" className="p-1.5 text-muted-foreground hover:text-foreground transition-colors">
-                          <ExternalLink className="h-4 w-4" />
-                        </a>
-                      )}
-                    </div>
+                    <a href={project.github_url || project.link || '#'} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-primary transition-colors">
+                      {project.github_url && <Github className="h-4 w-4 shrink-0" />}
+                      <h3 className="font-display font-semibold text-lg">{project.title}</h3>
+                    </a>
+                    {project.link && (
+                      <a href={project.link} target="_blank" rel="noopener noreferrer" className="p-1.5 text-muted-foreground hover:text-foreground transition-colors shrink-0">
+                        <ExternalLink className="h-4 w-4" />
+                      </a>
+                    )}
                   </div>
                   {project.description && (
                     <p className="text-sm text-muted-foreground leading-relaxed">{project.description}</p>
