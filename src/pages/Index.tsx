@@ -116,9 +116,7 @@ export default function Index() {
             transition={{ duration: 0.6 }}
             className="text-lg md:text-xl text-muted-foreground leading-relaxed"
           >
-            <span className="text-foreground font-semibold">I'm a passionate developer</span> with a knack for crafting elegant solutions
-            to complex problems. With experience building web applications, I specialize in creating seamless user experiences
-            backed by robust architectures.
+            <span className="text-foreground font-semibold">I'm a Computer Science UG Engineering student</span> at Dayananda Sagar University with a strong interest in Web Development and Machine Learning. Currently building my foundation with Python, Java, C, HTML, CSS and JS, and gaining real-world exposure through internships at NIT Puducherry and HCF. With a humble mindset, a curious spirit, and a constant drive to learn, I thrive in collaborative environments.
           </motion.p>
         </div>
       </section>
