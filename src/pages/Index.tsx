@@ -89,7 +89,7 @@ export default function Index() {
             </motion.p>
             <motion.p custom={3} variants={fadeUp} initial="hidden" animate="visible"
               className="text-muted-foreground leading-relaxed max-w-md mx-auto md:mx-0 mb-8">
-              I craft modern, performant digital experiences — turning ideas into clean, elegant products that make a difference.
+              I'm a Computer Science student at Dayananda Sagar University with a strong interest in Web Development and Machine Learning. I thrive in collaborative environments and love turning ideas into elegant solutions.
             </motion.p>
 
             {/* Social icons */}
