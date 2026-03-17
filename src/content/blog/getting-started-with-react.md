@@ -1,8 +1,8 @@
 ---
-title: "Getting Started with React in 2025"
-date: "2025-02-10"
-excerpt: "A beginner-friendly guide to starting your React journey in 2025, covering the modern tooling and best practices."
-readTime: "5 min read"
+title: "Does Starting Big Trouble You"
+date: "2025-01-15"
+excerpt: "If starting big scares you read this."
+readTime: "2 min read"
 ---
 
 # Getting Started with React in 2025

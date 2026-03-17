@@ -2,9 +2,33 @@ import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { motion } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
+import rehypeRaw from 'rehype-raw';
+import 'katex/dist/katex.min.css';
 import { getPostBySlug } from '@/lib/blog';
+import { latexToHtml } from '@/lib/latex-to-html';
 import BlogActions from '@/components/blog/BlogActions';
 import BlogComments from '@/components/blog/BlogComments';
+
+// Renders a LaTeX blog post by:
+// 1. Converting LaTeX commands to HTML via our custom converter
+// 2. Then passing the HTML through ReactMarkdown so KaTeX handles $...$ math
+function LatexRenderer({ content }: { content: string }) {
+  const html = latexToHtml(content);
+
+  return (
+    <div className="latex-body prose prose-neutral dark:prose-invert max-w-none prose-a:text-primary">
+      {/* Re-use ReactMarkdown so $...$ and $$...$$ inside the converted HTML get KaTeX-rendered */}
+      <ReactMarkdown
+        remarkPlugins={[remarkMath]}
+        rehypePlugins={[rehypeRaw, rehypeKatex]}
+      >
+        {html}
+      </ReactMarkdown>
+    </div>
+  );
+}
 
 export default function BlogPost() {
   const { slug } = useParams<{ slug: string }>();
@@ -24,13 +48,27 @@ export default function BlogPost() {
         <Link to="/blog" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-primary mb-8 transition-colors">
           <ArrowLeft className="h-4 w-4" /> Back to posts
         </Link>
-        <p className="text-sm text-muted-foreground mb-3">
-          {post.date} · {post.readTime}
-        </p>
+        {post.date || post.readTime ? (
+          <p className="text-sm text-muted-foreground mb-3">
+            {post.date}
+            {post.date && post.readTime && ' · '}
+            {post.readTime}
+          </p>
+        ) : null}
         <h1 className="font-display text-3xl md:text-5xl font-bold mb-10">{post.title}</h1>
-        <article className="prose prose-neutral dark:prose-invert max-w-none prose-headings:font-display prose-a:text-primary prose-code:bg-muted prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-pre:bg-muted prose-pre:border prose-pre:border-border">
-          <ReactMarkdown>{post.content}</ReactMarkdown>
-        </article>
+
+        {post.isLatex ? (
+          <LatexRenderer content={post.content} />
+        ) : (
+          <article className="prose prose-neutral dark:prose-invert max-w-none prose-headings:font-display prose-a:text-primary prose-code:bg-muted prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-pre:bg-muted prose-pre:border prose-pre:border-border">
+            <ReactMarkdown
+              remarkPlugins={[remarkMath]}
+              rehypePlugins={[rehypeRaw, rehypeKatex]}
+            >
+              {post.content}
+            </ReactMarkdown>
+          </article>
+        )}
 
         <BlogActions slug={post.slug} title={post.title} />
         <BlogComments slug={post.slug} />
