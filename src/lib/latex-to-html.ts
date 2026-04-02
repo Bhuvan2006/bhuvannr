@@ -36,6 +36,11 @@ function processInline(s: string): string {
     s = s.replace(/\\href\{([^}]*)\}\{([^}]*)\}/g, '<a href="$1" class="text-blue-600 underline">$2</a>');
     // \url{...}
     s = s.replace(/\\url\{([^}]*)\}/g, '<a href="$1" class="text-blue-600 underline">$1</a>');
+    // \includegraphics[options]{filename} — inline use (rare), resolve to /blog/images/
+    s = s.replace(/\\includegraphics(?:\[[^\]]*\])?\{([^}]*)\}/g, (_match, file) => {
+        const src = file.startsWith('http') ? file : `/blog/images/${file.replace(/^.*[\/\\]/, '')}`;
+        return `<img src="${src}" alt="" class="max-w-full rounded my-2" />`;
+    });
     // \LaTeX  \TeX
     s = s.replace(/\\LaTeX\b/g, '<span>L<sup>A</sup>T<sub>E</sub>X</span>');
     s = s.replace(/\\TeX\b/g, '<span>T<sub>E</sub>X</span>');
@@ -150,6 +155,44 @@ export function latexToHtml(tex: string): string {
             }
             const inner = absLines.map(l => processInline(escapeHtml(l.trim()))).join(' ');
             html += `<blockquote class="border-l-4 border-gray-300 pl-4 italic my-4 text-gray-600">${inner}</blockquote>\n`;
+            i++;
+            continue;
+        }
+
+        // ── figure environment: \begin{figure}...\includegraphics...\caption...\end{figure}
+        if (line.match(/^\\begin\{figure\*?\}/)) {
+            let imgSrc = '';
+            let caption = '';
+            i++;
+            while (i < lines.length && !lines[i].trim().match(/^\\end\{figure\*?\}/)) {
+                const figLine = lines[i].trim();
+                // Extract \includegraphics[opts]{file}
+                const igMatch = figLine.match(/\\includegraphics(?:\[[^\]]*\])?\{([^}]*)\}/);
+                if (igMatch) {
+                    const file = igMatch[1];
+                    imgSrc = file.startsWith('http') ? file : `/blog/images/${file.replace(/^.*[\/\\]/, '')}`;
+                }
+                // Extract \caption{...}
+                const capMatch = figLine.match(/\\caption\{([^}]*)\}/);
+                if (capMatch) caption = capMatch[1];
+                i++;
+            }
+            if (imgSrc) {
+                html += `<figure class="my-6 text-center">`;
+                html += `<img src="${imgSrc}" alt="${caption}" class="max-w-full mx-auto rounded shadow-md" />`;
+                if (caption) html += `<figcaption class="text-sm text-gray-500 mt-2 italic">${escapeHtml(caption)}</figcaption>`;
+                html += `</figure>\n`;
+            }
+            i++;
+            continue;
+        }
+
+        // ── Standalone \includegraphics (outside a figure environment)
+        const standaloneImg = line.match(/^\\includegraphics(?:\[[^\]]*\])?\{([^}]*)\}/);
+        if (standaloneImg) {
+            const file = standaloneImg[1];
+            const src = file.startsWith('http') ? file : `/blog/images/${file.replace(/^.*[\/\\]/, '')}`;
+            html += `<img src="${src}" alt="" class="max-w-full mx-auto rounded shadow-md my-4 block" />\n`;
             i++;
             continue;
         }
