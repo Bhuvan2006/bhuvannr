@@ -1,0 +1,210 @@
+\documentclass[11pt]{article}
+
+% ---------- PACKAGES ----------
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{caption}
+
+% ---------- COLORS ----------
+\definecolor{inkblue}{RGB}{20,40,90}
+\definecolor{notegray}{RGB}{245,245,245}
+
+% ---------- TITLE STYLING ----------
+\titleformat{\section}{\Large\bfseries\color{inkblue}}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries\color{inkblue}}{\thesubsection}{1em}{}
+
+\title{Building a Neural Network From Scratch: The Math Behind the Magic}
+\author{}
+\date{June 17, 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Building a neural network with PyTorch or TensorFlow is easy. But that ease hides the engine underneath. Building a network from scratch, with raw math, rebuilds your intuition. It shows you exactly what a framework does behind its clean syntax.
+\end{abstract}
+
+\section*{Why Build a Neural Network From Scratch?}
+
+Building a neural network with PyTorch or TensorFlow is easy. A few lines of code, and the model trains. But that ease hides the engine underneath. Building a network from scratch, with raw math, rebuilds your intuition. It shows you exactly what a framework does behind its clean syntax. This is the proportionate amount of knowledge every beginner needs before reaching for a library.
+
+\textbf{Prerequisites are void.} You need only two things: matrices and differentiation.
+
+\textbf{What you will learn:}
+\begin{itemize}[noitemsep]
+    \item Activation functions
+    \item Loss functions
+    \item Input and output dimensions, and layer structure
+    \item Forward pass and backpropagation
+\end{itemize}
+
+\textbf{Want to follow along with code?} The full working implementation for this MNIST neural network is available on Kaggle: \href{https://www.kaggle.com/code/bhuvannr2006/mnist-from-scratch}{mnist-from-scratch on Kaggle}. Open it alongside this article to see every equation come to life in Python.
+
+\section*{The Building Block: A Neuron}
+
+The fundamental component of a neural network is the node, also called a neuron. Each neuron holds two parts:
+
+\begin{enumerate}[noitemsep]
+    \item A \textbf{linear function} that learns patterns from data.
+    \item An \textbf{activation function} that pushes the signal forward.
+\end{enumerate}
+
+The linear function looks familiar. It is the same line equation from school:
+\[
+y = mx + c
+\]
+
+In neural networks, we write it with vectors and matrices instead of single numbers:
+\[
+z = wx + b
+\]
+where $w$ is the weight, and $b$ is the bias.
+
+The activation function comes next. It decides whether a neuron fires, and by how much. Common choices include ReLU, Leaky ReLU, and GELU. Without activation functions, a network collapses into one giant linear equation. It would never learn curves, edges, or complex patterns.
+
+We will build a 2-layer neural network. The example problem is MNIST: classifying handwritten digits from 0 to 9.
+
+\section*{Understanding the Input}
+
+To build a network for MNIST, you must first understand the shape of your input.
+
+Each MNIST image is $28 \times 28$ pixels. We flatten this into a 1D vector of size $784 \times 1$, because the input layer expects a 1D vector, not a 2D matrix. When we flatten the matrix, every pixel becomes one input feature.
+
+The images are grayscale, not RGB. Every pixel represents the intensity of a black stroke. Values range between 0 and 1, where 0 is pure white and 1 is pure black.
+
+To keep things simple, we flatten the image. Later, you can study Convolutional Neural Networks (CNNs) and build the same classifier while preserving spatial structure.
+
+This is a \textbf{fully connected} network. Every node in one layer connects to every node in the next layer.
+
+\section*{The Architecture}
+
+Our network has three layers:
+
+\begin{itemize}[noitemsep]
+    \item \textbf{Input layer:} 784 nodes (one per pixel)
+    \item \textbf{Hidden layer:} 10 nodes
+    \item \textbf{Output layer:} 10 nodes (one per digit class, 0 through 9)
+\end{itemize}
+
+\section*{The Forward Pass}
+
+To apply the linear function $y = wx + b$, we start with the flattened input vector $x$, of shape $(784, 1)$.
+
+We need weights to connect this input to the hidden layer. We initialize them with random values, using a shape of $(n, 784)$, where $n$ is the number of neurons in the hidden layer.
+
+\subsection*{Layer 1: Input to Hidden}
+
+\[
+z^{[1]}_{(n,1)} = w^{[1]}_{(n,784)} \cdot x_{(784,1)} + b^{[1]}_{(n,1)}, \quad n = 10
+\]
+
+After this linear step, we apply an activation function (such as ReLU) to get $a^{[1]}$, the activated hidden layer output, of shape $(10, 1)$:
+
+\[
+a^{[1]} = \text{ReLU}(z^{[1]})
+\]
+
+\subsection*{Layer 2: Hidden to Output}
+
+The weight matrix for this layer has shape $(n, 10)$, where $n$ is the number of nodes in the output layer.
+
+\[
+z^{[2]}_{(10,1)} = w^{[2]}_{(10,10)} \cdot a^{[1]}_{(10,1)} + b^{[2]}_{(10,1)}
+\]
+
+After this second linear step, we get $a^{[2]}$, the raw output, also of shape $(10, 1)$.
+
+\section*{Softmax: Turning Numbers into Probabilities}
+
+The raw output $a^{[2]}$ is a list of numbers, but they don't yet mean anything as probabilities. We apply the \textbf{softmax} function to normalize these values:
+
+\[
+\text{softmax}(z_i) = \frac{e^{z_i}}{\sum_{j=1}^{K} e^{z_j}}
+\]
+
+For example:
+\[
+[0, 0.25, 0.4, 0.15, 0.2] \xrightarrow{\text{Softmax}} [0.162, 0.209, 0.242, 0.189, 0.198]
+\]
+
+These outputs sum to exactly 1. Softmax cleans up inconsistent raw values and turns them into a proper probability distribution. The highest value marks the network's predicted class.
+
+\section*{The Loss Function: Measuring Mistakes}
+
+MNIST is a classification problem. We measure error using the \textbf{cross-entropy loss}, also called the negative log-likelihood:
+
+\[
+J = -\sum_{i=1}^{K} y_i \log(\hat{y}_i)
+\]
+
+Here, $y_i$ is the true label (1 for the correct class, 0 for all others, in one-hot form), and $\hat{y}_i$ is the predicted probability from softmax. This loss punishes confident, wrong predictions harshly, and rewards confident, correct predictions generously.
+
+\section*{Backpropagation: How the Network Learns}
+
+Now comes the main part. Backpropagation might feel complex at first glance. Stay patient; the logic builds in layers, just like the network itself.
+
+Backpropagation adjusts the weights to reduce the loss. It works backward from the output, layer by layer, using the chain rule of differentiation. Each weight gets nudged in the direction that lowers the error.
+
+\subsection*{Step 1: Output Layer Gradient}
+
+When softmax is paired with cross-entropy loss, the gradient simplifies elegantly:
+
+\[
+dz^{[2]} = a^{[2]} - y
+\]
+
+This single line says something powerful: the error signal is simply the difference between what the network predicted and what the true label says.
+
+\subsection*{Step 2: Gradients for Output Layer Weights and Bias}
+
+\[
+dw^{[2]} = dz^{[2]} \cdot {a^{[1]}}^T
+\]
+\[
+db^{[2]} = dz^{[2]}
+\]
+
+\subsection*{Step 3: Propagate Error Backward to the Hidden Layer}
+
+\[
+dz^{[1]} = {w^{[2]}}^T \cdot dz^{[2]} \;\odot\; g'(z^{[1]})
+\]
+
+Here, $g'(z^{[1]})$ is the derivative of the activation function (ReLU, for instance), and $\odot$ denotes element-wise multiplication.
+
+\subsection*{Step 4: Gradients for Hidden Layer Weights and Bias}
+
+\[
+dw^{[1]} = dz^{[1]} \cdot x^T
+\]
+\[
+db^{[1]} = dz^{[1]}
+\]
+
+\subsection*{Step 5: Update the Weights}
+
+Once gradients are calculated, we nudge every weight and bias slightly, using a learning rate $\alpha$:
+
+\[
+w^{[l]} := w^{[l]} - \alpha \, dw^{[l]}
+\]
+\[
+b^{[l]} := b^{[l]} - \alpha \, db^{[l]}
+\]
+
+Repeat this cycle, forward pass, loss calculation, backward pass, weight update, thousands of times across the training data. The network gradually learns the strokes, curves, and shapes that distinguish a 7 from a 1, or an 8 from a 0.
+
+\section*{What Comes Next}
+
+You now hold the complete picture: input dimensions, forward pass, softmax, loss, and backpropagation. This is the skeleton beneath every deep learning framework. PyTorch and TensorFlow automate these exact steps using autograd, but the math underneath never changes.
+
+Next, try coding this network using only NumPy. Watch the loss drop, epoch by epoch. Then move to CNNs, and build the same classifier while preserving the image's spatial structure. The fundamentals you just learned will carry forward into every architecture you study next.
+
+\end{document}

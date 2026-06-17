@@ -12,21 +12,16 @@ import BlogActions from '@/components/blog/BlogActions';
 import BlogComments from '@/components/blog/BlogComments';
 
 // Renders a LaTeX blog post by:
-// 1. Converting LaTeX commands to HTML via our custom converter
-// 2. Then passing the HTML through ReactMarkdown so KaTeX handles $...$ math
+// Converting LaTeX commands + math to HTML via our custom converter (which calls KaTeX directly).
+// Uses dangerouslySetInnerHTML because KaTeX outputs real HTML, not markdown.
 function LatexRenderer({ content }: { content: string }) {
   const html = latexToHtml(content);
 
   return (
-    <div className="latex-body prose prose-neutral dark:prose-invert max-w-none prose-a:text-primary">
-      {/* Re-use ReactMarkdown so $...$ and $$...$$ inside the converted HTML get KaTeX-rendered */}
-      <ReactMarkdown
-        remarkPlugins={[remarkMath]}
-        rehypePlugins={[rehypeRaw, rehypeKatex]}
-      >
-        {html}
-      </ReactMarkdown>
-    </div>
+    <div
+      className="latex-body prose prose-neutral dark:prose-invert max-w-none prose-a:text-primary"
+      dangerouslySetInnerHTML={{ __html: html }}
+    />
   );
 }
 
