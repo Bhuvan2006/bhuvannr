@@ -12,6 +12,7 @@ interface BlogActionsProps {
 export default function BlogActions({ slug, title }: BlogActionsProps) {
   const [likeCount, setLikeCount] = useState(0);
   const [liked, setLiked] = useState(false);
+  const [liking, setLiking] = useState(false);
   const [showShare, setShowShare] = useState(false);
 
   useEffect(() => {
@@ -26,7 +27,8 @@ export default function BlogActions({ slug, title }: BlogActionsProps) {
   }, [slug]);
 
   const handleLike = async () => {
-    if (liked) return;
+    if (liked || liking) return;
+    setLiking(true);
     const { error } = await supabase.from('blog_likes').insert({ post_slug: slug });
     if (!error) {
       setLiked(true);
@@ -34,6 +36,7 @@ export default function BlogActions({ slug, title }: BlogActionsProps) {
       const likedPosts = JSON.parse(localStorage.getItem('liked_posts') || '[]');
       localStorage.setItem('liked_posts', JSON.stringify([...likedPosts, slug]));
     }
+    setLiking(false);
   };
 
   const url = typeof window !== 'undefined' ? window.location.href : '';
@@ -53,9 +56,10 @@ export default function BlogActions({ slug, title }: BlogActionsProps) {
     <div className="flex items-center gap-6 py-6 border-t border-b border-border my-10">
       <button
         onClick={handleLike}
+        disabled={liked || liking}
         className={`flex items-center gap-2 text-sm transition-colors duration-200 ${
           liked ? 'text-red-500' : 'text-muted-foreground hover:text-red-500'
-        }`}
+        } disabled:cursor-not-allowed`}
       >
         <motion.div whileTap={{ scale: 1.3 }} transition={{ type: 'spring', stiffness: 400 }}>
           <Heart className={`h-5 w-5 ${liked ? 'fill-current' : ''}`} />
