@@ -10,7 +10,7 @@ export default function Blog() {
     <div className="min-h-screen pt-24 pb-16">
       <div className="container max-w-5xl">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-12">
-          <h1 className="font-display text-4xl md:text-5xl font-bold mb-4">Thoughts & Writing</h1>
+          <h1 className="font-sans text-4xl md:text-5xl font-bold mb-4 text-balance">Thoughts & Writing</h1>
           <p className="text-lg text-muted-foreground">My latest technical articles, tutorials, and personal thoughts.</p>
         </motion.div>
 
@@ -34,7 +34,7 @@ export default function Blog() {
                     <span>{post.readTime}</span>
                   </div>
 
-                  <h2 className="font-display text-2xl font-bold mb-3 transition-colors duration-300 group-hover:text-primary line-clamp-2">
+                  <h2 className="font-sans text-2xl font-bold mb-3 transition-colors duration-300 group-hover:text-primary line-clamp-2">
                     {post.title}
                   </h2>
                   <p className="text-sm text-muted-foreground leading-relaxed flex-grow line-clamp-4 mb-6">

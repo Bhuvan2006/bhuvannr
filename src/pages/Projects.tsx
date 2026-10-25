@@ -22,7 +22,7 @@ export default function Projects() {
     <div className="min-h-screen pt-24 pb-16">
       <div className="container max-w-5xl">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="mb-12">
-          <h1 className="font-display text-4xl font-bold mb-2">Projects</h1>
+          <h1 className="font-sans text-4xl font-bold mb-2 text-balance">Projects</h1>
           <p className="text-muted-foreground">A selection of things I've built.</p>
         </motion.div>
 
@@ -55,7 +55,7 @@ export default function Projects() {
                   <div className="flex items-start justify-between gap-3 mb-2">
                     <a href={project.github_url || project.link || '#'} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-primary transition-colors">
                       {project.github_url && <Github className="h-4 w-4 shrink-0" />}
-                      <h3 className="font-display font-semibold text-lg">{project.title}</h3>
+                      <h3 className="font-sans font-semibold text-lg">{project.title}</h3>
                     </a>
                     {project.link && (
                       <a href={project.link} target="_blank" rel="noopener noreferrer" className="p-1.5 text-muted-foreground hover:text-foreground transition-colors shrink-0">

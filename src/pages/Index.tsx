@@ -76,15 +76,15 @@ export default function Index() {
           {/* Right — Text */}
           <div className="text-center md:text-left">
             <motion.p custom={0} variants={fadeUp} initial="hidden" animate="visible"
-              className="text-sm text-muted-foreground uppercase tracking-[0.2em] mb-4">
+              className="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-3">
               Hello, I'm
             </motion.p>
             <motion.h1 custom={1} variants={fadeUp} initial="hidden" animate="visible"
-              className="font-display text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-4 leading-[1.1]">
+              className="font-sans text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-4 text-balance leading-[1.1]">
               Bhuvan N.R
             </motion.h1>
             <motion.p custom={2} variants={fadeUp} initial="hidden" animate="visible"
-              className="font-display text-xl md:text-2xl text-muted-foreground font-medium mb-6">
+              className="font-sans text-lg md:text-xl text-muted-foreground font-medium tracking-tight mb-6">
               B.Tech CSE Student & Developer
             </motion.p>
             <motion.p custom={3} variants={fadeUp} initial="hidden" animate="visible"
@@ -132,7 +132,7 @@ export default function Index() {
             className="flex items-end justify-between mb-10"
           >
             <div>
-              <h2 className="font-display text-3xl font-bold mb-2">Featured Projects</h2>
+              <h2 className="font-sans text-3xl font-bold mb-2 text-balance">Featured Projects</h2>
               <p className="text-muted-foreground">A few highlights from my ML & AI work.</p>
             </div>
             <Link to="/projects" className="hidden md:inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
@@ -172,7 +172,7 @@ export default function Index() {
                   <div className="p-5">
                     <div className="flex items-center gap-2 mb-2">
                       {project.github_url && <Github className="h-4 w-4 text-muted-foreground" />}
-                      <h3 className="font-display font-semibold text-lg">{project.title}</h3>
+                      <h3 className="font-sans font-semibold text-lg">{project.title}</h3>
                     </div>
                     <p className="text-sm text-muted-foreground leading-relaxed">{project.description}</p>
                   </div>
@@ -205,7 +205,7 @@ export default function Index() {
                   to={section.link}
                   className="group block h-full p-8 rounded-xl border border-border bg-card hover:bg-secondary/60 transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
                 >
-                  <h3 className="font-display text-lg font-bold mb-3 group-hover:text-foreground transition-colors">
+                  <h3 className="font-sans text-lg font-bold mb-3 group-hover:text-foreground transition-colors">
                     {section.title}
                   </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed mb-6">
@@ -226,7 +226,7 @@ export default function Index() {
       <section className="border-t border-border">
         <div className="container max-w-3xl py-20">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-            <h2 className="font-display text-2xl font-bold mb-6 text-center">Skills & Technologies</h2>
+            <h2 className="font-sans text-2xl font-bold mb-6 text-center text-balance">Skills & Technologies</h2>
             <div className="flex flex-wrap gap-2 justify-center">
               {['Front-End Development', 'React', 'TypeScript', 'Python', 'Java', 'C', 'HTML/CSS', 'JavaScript', 'Data Structures', 'Machine Learning', 'Tailwind CSS', 'Git'].map((skill) => (
                 <span key={skill} className="px-4 py-2 rounded-full text-xs font-medium bg-secondary text-foreground border border-border hover:bg-accent transition-colors duration-200">

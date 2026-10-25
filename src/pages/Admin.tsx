@@ -15,7 +15,7 @@ export default function Admin() {
   return (
     <div className="min-h-screen pt-24 pb-16">
       <div className="container">
-        <h1 className="font-display text-3xl font-bold mb-8">Admin Dashboard</h1>
+        <h1 className="font-sans text-3xl font-bold mb-8 text-balance">Admin Dashboard</h1>
         <Tabs defaultValue="projects">
           <TabsList className="mb-6">
             <TabsTrigger value="projects">Projects</TabsTrigger>

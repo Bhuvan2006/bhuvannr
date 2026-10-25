@@ -61,7 +61,7 @@ export default function Resume() {
       <div className="container max-w-3xl">
         <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.5 }} className="flex items-center justify-between mb-12">
           <div>
-            <h1 className="font-display text-4xl font-bold mb-2">Resume</h1>
+            <h1 className="font-sans text-4xl font-bold mb-2 text-balance">Resume</h1>
             <p className="text-muted-foreground">My professional journey so far.</p>
           </div>
           <Button variant="outline" size="sm" className="gap-2">
@@ -71,13 +71,13 @@ export default function Resume() {
 
         {/* Experience */}
         <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ duration: 0.5 }} className="mb-16">
-          <h2 className="font-display text-xl font-bold mb-8 uppercase tracking-wider text-muted-foreground text-sm">Experience</h2>
+          <h2 className="font-sans text-xl font-bold mb-8 uppercase tracking-wider text-muted-foreground text-sm">Experience</h2>
           <div className="space-y-8">
             {experience.map((item, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="relative pl-6 border-l-2 border-border">
                 <div className="absolute left-[-5px] top-1.5 w-2 h-2 rounded-full bg-foreground" />
                 <p className="text-xs text-muted-foreground mb-1">{item.period}</p>
-                <h3 className="font-display font-semibold text-lg">{item.role}</h3>
+                <h3 className="font-sans font-semibold text-lg">{item.role}</h3>
                 <p className="text-sm text-muted-foreground mb-2">{item.company}</p>
                 <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
               </motion.div>
@@ -87,13 +87,13 @@ export default function Resume() {
 
         {/* Education */}
         <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ duration: 0.5 }} className="mb-16">
-          <h2 className="font-display text-xl font-bold mb-8 uppercase tracking-wider text-muted-foreground text-sm">Education</h2>
+          <h2 className="font-sans text-xl font-bold mb-8 uppercase tracking-wider text-muted-foreground text-sm">Education</h2>
           <div className="space-y-8">
             {education.map((item, i) => (
               <div key={i} className="relative pl-6 border-l-2 border-border">
                 <div className="absolute left-[-5px] top-1.5 w-2 h-2 rounded-full bg-foreground" />
                 <p className="text-xs text-muted-foreground mb-1">{item.period}</p>
-                <h3 className="font-display font-semibold text-lg">{item.degree}</h3>
+                <h3 className="font-sans font-semibold text-lg">{item.degree}</h3>
                 <p className="text-sm text-muted-foreground mb-2">{item.school}</p>
                 <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
               </div>
@@ -103,7 +103,7 @@ export default function Resume() {
 
         {/* Certifications */}
         <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ duration: 0.5 }}>
-          <h2 className="font-display text-xl font-bold mb-8 uppercase tracking-wider text-muted-foreground text-sm">Certifications</h2>
+          <h2 className="font-sans text-xl font-bold mb-8 uppercase tracking-wider text-muted-foreground text-sm">Certifications</h2>
           <ul className="space-y-3">
             {certifications.map((cert, i) => (
               <li key={i} className="flex items-center gap-3 text-sm">

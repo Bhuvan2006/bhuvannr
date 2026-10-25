@@ -50,7 +50,7 @@ export default function BlogPost() {
             {post.readTime}
           </p>
         ) : null}
-        <h1 className="font-display text-3xl md:text-5xl font-bold mb-10">{post.title}</h1>
+        <h1 className="font-sans text-3xl md:text-5xl font-bold mb-10 text-balance">{post.title}</h1>
 
         {post.isLatex ? (
           <LatexRenderer content={post.content} />
