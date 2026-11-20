@@ -1,0 +1,101 @@
+\documentclass[a4paper]{article}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+
+\title{Convolutional Neural Networks}
+
+\author{Bhuvan N.R}
+
+\date{April 4,2026}
+
+\begin{document}
+\maketitle
+
+
+\section{Introduction to Convolutional Neural Networks}
+
+Convolutional Neural Network (CNN) are also known as ConvNet , this  type of deep learning algorithm are designed for tasks like image processing ,object detection, segmentation .It was inspired by human visual architecture .  
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{cnn.png}
+    \caption{padding}
+    \label{fig:cnn}
+\end{figure}
+
+\section{Key Components of CNN}
+\label{sec:examples}
+
+
+CNN's also known as covnets , is a sequence of layers and every layer transforms one volume to another through a differentiable function.  
+
+CNN's process image through various layers
+\begin{itemize}
+    \item Input Layer
+    \item Convolutional Layer
+    \item Pooling Layer
+    \item Activation Layer
+\end{itemize}
+
+\section{Input Layer}
+This is were the raw image data is taken for processing. In CNNs we take pictures with various(ex: color channels like RGB,BGR).
+
+\section{Convolutional Layer}
+In this layer as the name suggests we perform mathematical task called as convolution.It consists of several small grid of same size (called filters or kernels).
+
+The Kernel is then moved across image to extract features like lines, curves and other features.We generally convert into grayscale(32 x 32) if image (32 x 32 x 3) is RGB, if we are working on MNIST handwritten digit dataset.
+
+So when the weighted matrix(array of img) is multiplied with various kernel, we extract features and get the final matrix (Convoluted matrix) which recognize patterns and help detect the image.
+
+Here filters vary, like one can be used to detect straight line other can be used for detecting curves and so on.
+
+\section{Pooling Layer}
+This layer is very important because this is where we reduce the size of the image and increase the performance of the model.There are various pooling method based on use cases like max pooling, average pooling and others,there functions are similar to names for the selected sub grid of image it finds max, average.
+
+\textbf{Stride} it is used to tell the no of steps moved by subgrid.Take the example below
+For stride=1
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{pools1.png}
+    \label{fig:pools1}
+\end{figure}
+
+For stride=2
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{pools2.png}
+    \caption{pooling with stride 1 & 2}
+    \label{fig:pools2}
+\end{figure}
+
+
+\textbf{Padding} adds extra pixels for image which changes the ouput size.It is important because when applying feature map edges are ignored(starting row map runs once while feature map moves over other rows several times).Hence to provide significance to edge pixels we use padding. 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{padd.png}
+    \caption{padding}
+    \label{fig:padd}
+\end{figure}
+The zeros mentioned are empty pixels added using padding.
+
+\section{Flattening }
+Flattening converts the multi-dimensional feature maps into a 1D vector after convolution and pooling. This vector is then passed to the fully connected layer for classification or regression.
+
+ex: Flattening 16 × 16 × 12 results in a vector of size 3072 (16 × 16 × 12) for handwritten dataset.
+
+\section{Fully Connected Layer}
+The fully connected (dense) layer performs high-level reasoning using extracted features and produces the final classification scores.
+
+\section{Activation Layer}
+The Activation Layer introduces non-linearity into the network by applying an element wise activation function to the output of the convolution layer. This enables the model to learn complex patterns beyond linear relationships.
+
+
+\section{Conclusion}
+This article has provided a complete overview of what a CNN in deep learning is, along with their crucial role in image recognition and classification tasks.
+
+It started by highlighting the inspiration drawn from the human visual system for the design of CNNs and then explored the key components that allow these networks to learn and make predictions.
+\end{document}
